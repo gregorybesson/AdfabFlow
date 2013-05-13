@@ -37,6 +37,26 @@ class RestAuthentController extends AbstractRestfulController
                     'success' => 'http://ic.adfab.fr/pmagento/index.php/customer/account/logoutSuccess/',
                 ),
             ),
+            'taxonomy' => array(
+                'config' => array(
+                    'broadcast' => false,
+                ),
+                'items' => array(
+                    array(
+                        'url' => '/account', 
+                        'xpath' => "//div[@class='block-account']",
+                        'id' =>  'account'
+                    ),
+                    array(
+                        'url' => '/checkout',
+                        'id' =>  'checkout'
+                    ),
+                    array(
+                        'xpath' => "//div[@class='my-wishlist']",
+                        'id' =>  'wishlist'
+                    ),
+                ),
+            ),
         );
 
         $response->setContent($adapter->serialize($content));
