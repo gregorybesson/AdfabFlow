@@ -1,14 +1,14 @@
 {
-    "name": "adfab/adfab-core",
-    "description": "Common features for all AdFab ZF2 dev",
+    "name": "adfab/flow",
+    "description": "getting and sending flow",
     "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
         "playground",
-        "adfab-core"
+        "flow"
     ],
-    "homepage": "https://github.com/gregorybesson/AdfabCore",
+    "homepage": "https://github.com/gregorybesson/AdfabFlow",
     "authors": [
         {
             "name": "Greg Besson",
@@ -32,7 +32,7 @@
     },
     "autoload" : {
 		"psr-0" : {
-			"AdfabCore" : "src/"
+			"AdfabFlow" : "src/"
 		}
 	}
 }
