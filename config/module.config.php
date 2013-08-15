@@ -19,7 +19,15 @@ return array(
 
     'view_manager' => array(
         'template_map' => array(
-            'adfab-flow/index/init'               => __DIR__ .  '/../view/adfab-flow/frontend/init.phtml',
+            'adfab-flow/index/init'				=> __DIR__ .  '/../view/adfab-flow/frontend/init.phtml',
+        	'adfab-flow/action/list'			=> __DIR__ .  '/../view/adfab-flow/admin/action/list.phtml',
+        	'adfab-flow/object/list'			=> __DIR__ .  '/../view/adfab-flow/admin/object/list.phtml',
+        	'adfab-flow/object/list-attribute'	=> __DIR__ .  '/../view/adfab-flow/admin/object/list-attribute.phtml',
+        	'adfab-flow/story/list'				=> __DIR__ .  '/../view/adfab-flow/admin/story/list.phtml',
+        	'adfab-flow/domain/list'			=> __DIR__ .  '/../view/adfab-flow/admin/domain/list.phtml',
+        	'adfab-flow/domain/list-story'		=> __DIR__ .  '/../view/adfab-flow/admin/domain/list-story.phtml',
+        	'adfab-flow/domain/list-attribute'  => __DIR__ .  '/../view/adfab-flow/admin/domain/list-attribute.phtml',
+        		
         ),
         'template_path_stack' => array(
             'adfabflow' => __DIR__ . '/../view',
@@ -32,10 +40,14 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'adfabflowadmin'        => 'AdfabFlow\Controller\AdminController',
+        	'adfabflowadminaction'  => 'AdfabFlow\Controller\Admin\ActionController',
+        	'adfabflowadminobject'  => 'AdfabFlow\Controller\Admin\ObjectController',
+        	'adfabflowadminstory'   => 'AdfabFlow\Controller\Admin\StoryController',
+        	'adfabflowadmindomain'  => 'AdfabFlow\Controller\Admin\DomainController',
             'adfabflow'             => 'AdfabFlow\Controller\IndexController',
             'adfabflowrest'         => 'AdfabFlow\Controller\RestController',
             'adfabflowrestauthent'  => 'AdfabFlow\Controller\RestAuthentController',
-            'adfabflowrestecho'     => 'AdfabFlow\Controller\RestEchoController',
+            'adfabflowrestsend'     => 'AdfabFlow\Controller\RestSendController',
         ),
     ),
 
@@ -59,15 +71,15 @@ return array(
                     ),
                 ),
             ),
-            'flowecho' => array(
+            'flowsend' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route' => '/flow/:appId/rest/echo[/:id]',
+                    'route' => '/flow/:appId/rest/send[/:id]',
                     'constraints' => array(
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'adfabflowrestecho',
+                        'controller' => 'adfabflowrestsend',
                     ),
                 ),
             ),
@@ -96,7 +108,7 @@ return array(
             ),
             'zfcadmin' => array(
                 'child_routes' => array(
-                    'adfabflowadmin' => array(
+                    'adfabflow' => array(
                         'type' => 'Literal',
                         'priority' => 1000,
                         'options' => array(
@@ -106,7 +118,414 @@ return array(
                                 'action'     => 'index',
                             ),
                         ),
-                    ),
+                    	'child_routes' =>array(
+                  			'list' => array(
+               					'type' => 'Segment',
+               					'options' => array(
+              						'route' => '/list/:appId[/:p]',
+            						'defaults' => array(
+          								'controller' => 'adfabflowadmin',
+              							'action'     => 'list',
+              							'appId'     => 0
+               						),
+                   				),
+                   			),
+                    		'action' => array(
+                    			'type' => 'Segment',
+                    			'options' => array(
+                   					'route' => '/action',
+                   					'defaults' => array(
+                   						'controller' => 'adfabflowadminaction',
+               							'action'     => 'list',
+              						),
+               					),
+                    			'may_terminate' => true,
+                    			'child_routes' =>array(
+                    				'pagination' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+           									'route' => '/:p',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadminaction',
+               									'action'     => 'list',
+                    						),
+                    					),
+                   					),
+                    				'create' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+           									'route' => '/create/:actionId',
+                							'defaults' => array(
+              	     							'controller' => 'adfabflowadminaction',
+               									'action'     => 'create',
+       											'actionId'     => 0
+                    						),
+                    					),
+                    				),
+                    				'edit' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+           									'route' => '/edit/:actionId',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadminaction',
+              									'action'     => 'edit',
+       											'actionId'     => 0
+                    						),
+                   						),
+                   					),
+                    				'remove' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+           									'route' => '/remove/:actionId',
+           									'defaults' => array(
+                    							'controller' => 'adfabflowadminaction',
+                   								'action'     => 'remove',
+       											'actionId'     => 0
+                    						),
+                    					),
+                   					),                    					
+                   				),
+                    		),
+                    		'story' => array(
+                    			'type' => 'Segment',
+               					'options' => array(
+          							'route' => '/story',
+                    				'defaults' => array(
+                    					'controller' => 'adfabflowadminstory',
+                    					'action'     => 'list',
+                    				),
+                    			),
+                    			'may_terminate' => true,
+                    			'child_routes' =>array(
+                    				'pagination' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/:p',
+      										'defaults' => array(
+                    							'controller' => 'adfabflowadminstory',
+                    							'action'     => 'list',
+       										),
+                    					),
+                    				),
+                    				'create' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/create/:storyId',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadminstory',
+                    							'action'     => 'create',
+                    							'storyId'     => 0
+                    						),
+                    					),
+                    				),
+                    				'edit' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/edit/:storyId',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadminstory',
+                    							'action'     => 'edit',
+                    							'storyId'     => 0
+                    						),
+                    					),
+                    				),
+                    				'remove' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/remove/:storyId',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadminstory',
+                    							'action'     => 'remove',
+   												'storyId'     => 0
+                    						),
+                    					),
+                   					),
+               					),
+                    		),
+                    		'domain' => array(
+                    			'type' => 'Segment',
+                    			'options' => array(
+                    				'route' => '/domain',
+                    				'defaults' => array(
+                    					'controller' => 'adfabflowadmindomain',
+                    					'action'     => 'list',
+               						),
+               					),
+                    			'may_terminate' => true,
+                    			'child_routes' =>array(
+                    				'pagination' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/:p',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadmindomain',
+                    							'action'     => 'list',
+                    						),
+               							),
+           							),
+                    				'create' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/create/:domainId',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadmindomain',
+                    							'action'     => 'create',
+   												'domainId'     => 0
+                    						),
+                    					),
+                   					),
+                    				'edit' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+                    						'route' => '/edit/:domainId',
+                    						'defaults' => array(
+   												'controller' => 'adfabflowadmindomain',
+                    							'action'     => 'edit',
+                    							'domainId'     => 0
+                    						),
+                    					),
+              						),
+                    				'remove' => array(
+                   						'type' => 'Segment',
+       									'options' => array(
+                    						'route' => '/remove/:domainId',
+                   							'defaults' => array(
+   												'controller' => 'adfabflowadmindomain',
+                    							'action'     => 'remove',
+                    							'domainId'     => 0
+      										),
+                    					),
+                    				),
+                    				'story' => array(
+                    					'type' => 'Segment',
+                    					'options' => array(
+           									'route' => '/:domainId/story',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadmindomain',
+                    							'action'     => 'listStory',
+               									'domainId'     => 0
+                    						),
+                    					),
+                    					'may_terminate' => true,
+                    					'child_routes' =>array(
+                    						'pagination' => array(
+                    							'type' => 'Segment',
+               									'options' => array(
+                    								'route' => '/:p',
+                    								'defaults' => array(
+           												'controller' => 'adfabflowadmindomain',
+                    									'action'     => 'listStory',
+                    								),
+               									),
+                    						),
+                    						'create' => array(
+                    							'type' => 'Segment',
+               									'options' => array(
+                    								'route' => '/create/:mappingId',
+                    								'defaults' => array(
+          												'controller' => 'adfabflowadmindomain',
+              											'action'     => 'createStory',
+                    									'mappingId'     => 0
+       												),
+                    							),
+                    						),
+                    						'edit' => array(
+                    							'type' => 'Segment',
+                    							'options' => array(
+                    								'route' => '/edit/:mappingId',
+                    								'defaults' => array(
+                    									'controller' => 'adfabflowadmindomain',
+                    									'action'     => 'editStory',
+                    									'mappingId'     => 0
+                    								),
+                    							),
+           									),
+                    						'remove' => array(
+                    							'type' => 'Segment',
+               									'options' => array(
+                    								'route' => '/remove/:mappingId',
+                    								'defaults' => array(
+                    									'controller' => 'adfabflowadmindomain',
+                    									'action'     => 'removeStory',
+                    									'mappingId'     => 0
+                    								),
+                    							),
+           									),
+                    						'attribute' => array(
+                    							'type' => 'Segment',
+                    							'options' => array(
+                    								'route' => '/:mappingId/attribute',
+                   									'defaults' => array(
+                    									'controller' => 'adfabflowadmindomain',
+                    									'action'     => 'listAttribute',
+                    									'mappingId'     => 0
+                    								),
+                    							),
+                    									'may_terminate' => true,
+                    									'child_routes' =>array(
+                    											'pagination' => array(
+                    													'type' => 'Segment',
+                    													'options' => array(
+                    															'route' => '/:p',
+                    															'defaults' => array(
+                    																	'controller' => 'adfabflowadmindomain',
+                    																	'action'     => 'listAttribute',
+                    															),
+                    													),
+                    											),
+                    											'create' => array(
+                    													'type' => 'Segment',
+                    													'options' => array(
+                    															'route' => '/create/:attributeId',
+                    															'defaults' => array(
+                    																	'controller' => 'adfabflowadmindomain',
+                    																	'action'     => 'createAttribute',
+                    																	'attributeId'     => 0
+                    															),
+                    													),
+                    											),
+                    											'edit' => array(
+                    													'type' => 'Segment',
+                    													'options' => array(
+                    															'route' => '/edit/:attributeId',
+                    															'defaults' => array(
+                    																	'controller' => 'adfabflowadmindomain',
+                    																	'action'     => 'editAttribute',
+                    																	'attributeId'     => 0
+                    															),
+                    													),
+                    											),
+                    											'remove' => array(
+                    													'type' => 'Segment',
+                    													'options' => array(
+                    															'route' => '/remove/:attributeId',
+                    															'defaults' => array(
+                    																	'controller' => 'adfabflowadmindomain',
+                    																	'action'     => 'removeAttribute',
+                    																	'attributeId'     => 0
+                    															),
+                    													),
+                    											),
+                    									),
+                    							),
+                    					),
+                    				),
+                    			),
+                    		),
+                    		'object' => array(
+                    			'type' => 'Segment',
+                    			'options' => array(
+               						'route' => '/object',
+               						'defaults' => array(
+          								'controller' => 'adfabflowadminobject',
+                  						'action'     => 'list',
+                   					),
+                   				),
+               					'may_terminate' => true,
+               					'child_routes' =>array(
+               						'pagination' => array(
+               							'type' => 'Segment',
+                  						'options' => array(
+                   						'route' => '/:p',
+                    						'defaults' => array(
+                    							'controller' => 'adfabflowadminobject',
+                    							'action'     => 'list',
+                    						),
+                   						),
+               						),
+           							'create' => array(
+               							'type' => 'Segment',
+              							'options' => array(
+                   							'route' => '/create/:objectId',
+                   							'defaults' => array(
+                   								'controller' => 'adfabflowadminobject',
+                   								'action'     => 'create',
+                   								'objectId'     => 0
+               								),
+               							),
+           							),
+           							'edit' => array(
+               							'type' => 'Segment',
+               							'options' => array(
+                   							'route' => '/edit/:objectId',
+                   							'defaults' => array(
+                   								'controller' => 'adfabflowadminobject',
+                  								'action'     => 'edit',
+                    							'objectId'     => 0
+                   							),
+                   						),
+                   					),
+                 					'remove' => array(
+                   						'type' => 'Segment',
+               							'options' => array(
+               								'route' => '/remove/:objectId',
+               								'defaults' => array(
+               									'controller' => 'adfabflowadminobject',
+               									'action'     => 'remove',
+           										'objectId'     => 0
+           									),
+               							),
+               						),
+               						'attribute' => array(
+               							'type' => 'Segment',
+               							'options' => array(
+           									'route' => '/attribute',
+        									'defaults' => array(
+               									'controller' => 'adfabflowadminobject',
+               									'action'     => 'listAttribute',
+               								),
+               							),
+               							'may_terminate' => true,
+               							'child_routes' =>array(
+               								'pagination' => array(
+               									'type' => 'Segment',
+       											'options' => array(
+               										'route' => '/:p',
+               										'defaults' => array(
+               											'controller' => 'adfabflowadminobject',
+														'action'     => 'listAttribute',
+               										),
+               									),
+               								),
+               								'create' => array(
+               									'type' => 'Segment',
+               									'options' => array(
+               										'route' => '/create/:attributeId',
+               										'defaults' => array(
+               											'controller' => 'adfabflowadminobject',
+														'action'     => 'createAttribute',
+               											'attributeId'     => 0
+               										),
+       											),
+        									),
+               								'edit' => array(
+               									'type' => 'Segment',
+               									'options' => array(
+               										'route' => '/edit/:attributeId',
+               										'defaults' => array(
+               											'controller' => 'adfabflowadminobject',
+               											'action'     => 'editAttribute',
+               											'attributeId'     => 0
+               										),
+               									),
+       										),
+               								'remove' => array(
+               									'type' => 'Segment',
+               									'options' => array(
+       												'route' => '/remove/:attributeId',
+               										'defaults' => array(
+               											'controller' => 'adfabflowadminobject',
+               											'action'     => 'removeAttribute',
+               											'attributeId'     => 0
+               										),
+               									),
+               								),
+               							),
+               						),
+                    			),
+                    		),
+                   		),
+                   	),
                 ),
             ),
         ),
@@ -125,21 +544,51 @@ return array(
     ),
 
     'navigation' => array(
-        'admin' => array(
-            'adfabflowadmin' => array(
-                'label' => 'Flow',
-                'route' => 'zfcadmin/adfabflowadmin',
-                'resource' => 'flow',
-                'privilege' => 'index',
-                'pages' => array(
-                    'create' => array(
-                        'label' => 'Flow',
-                        'route' => 'zfcadmin/adfabflowadmin',
-                        'resource' => 'flow',
-                        'privilege' => 'index',
-                    ),
-                ),
-            ),
-        ),
-    )
+    	'admin' => array(
+    		'adfabflow'     => array(
+    			'label'     => 'Open Graph',
+    			'route'     => 'zfcadmin/adfabflow/story',
+    			'resource'  => 'flow',
+    			'privilege' => 'list',
+    			'pages' => array(
+    				'list' => array(
+    					'label'     => 'Liste des stories',
+    					'route'     => 'zfcadmin/adfabflow/story',
+    					'resource'  => 'flow',
+    					'privilege' => 'list',
+    				),
+    					'create' => array(
+    							'label'     => 'Creer une story',
+    							'route'     => 'zfcadmin/adfabflow/story/create',
+    							'resource'  => 'flow',
+    							'privilege' => 'list',
+    					),
+    					'listactions' => array(
+    						'label'     => 'Liste des actions',
+    						'route'     => 'zfcadmin/adfabflow/action',
+    						'resource'  => 'flow',
+    						'privilege' => 'list',
+    					),
+    					'listobjects' => array(
+    						'label'     => 'Liste des objets',
+    						'route'     => 'zfcadmin/adfabflow/object',
+    						'resource'  => 'flow',
+   							'privilege' => 'list',
+    					),
+    					'listapps' => array(
+    							'label'     => 'Liste des domaines',
+    							'route'     => 'zfcadmin/adfabflow/domain',
+    							'resource'  => 'flow',
+    							'privilege' => 'list',
+    					),
+    					'listdomains' => array(
+    							'label'     => 'Liste des apps',
+    							'route'     => 'zfcadmin/adfabflow/list',
+    							'resource'  => 'flow',
+    							'privilege' => 'list',
+    					),
+    			),
+    		),
+    	),
+    ),
 );

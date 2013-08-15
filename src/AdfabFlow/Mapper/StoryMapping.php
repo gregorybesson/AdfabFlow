@@ -9,7 +9,7 @@ use ZfcBase\Mapper\AbstractDbMapper;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use AdfabFlow\Options\ModuleOptions;
 
-class Action implements ServiceLocatorAwareInterface
+class StoryMapping implements ServiceLocatorAwareInterface
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -40,6 +40,11 @@ class Action implements ServiceLocatorAwareInterface
     public function findById($id)
     {
         return $this->getEntityRepository()->find($id);
+    }
+    
+    public function findByDomainId($domain)
+    {
+    	return $this->getEntityRepository()->findBy(array('domain' => $domain));
     }
 
     public function findBy($array)
@@ -86,7 +91,7 @@ class Action implements ServiceLocatorAwareInterface
     public function getEntityRepository()
     {
         if (null === $this->er) {
-            $this->er = $this->em->getRepository('AdfabFlow\Entity\OpenGraphAction');
+            $this->er = $this->em->getRepository('AdfabFlow\Entity\OpenGraphStoryMapping');
         }
 
         return $this->er;

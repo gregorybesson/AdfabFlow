@@ -2,8 +2,7 @@
 
 namespace AdfabFlow\Options;
 
-class ModuleOptions implements
-    ActionListOptionsInterface
+class ModuleOptions
 {
     /**
      * @var string

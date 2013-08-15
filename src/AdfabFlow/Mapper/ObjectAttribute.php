@@ -9,7 +9,7 @@ use ZfcBase\Mapper\AbstractDbMapper;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use AdfabFlow\Options\ModuleOptions;
 
-class Action implements ServiceLocatorAwareInterface
+class ObjectAttribute implements ServiceLocatorAwareInterface
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -42,6 +42,11 @@ class Action implements ServiceLocatorAwareInterface
         return $this->getEntityRepository()->find($id);
     }
 
+    public function findByObjectId($object)
+    {
+    	return $this->getEntityRepository()->findBy(array('object' => $object));
+    }
+    
     public function findBy($array)
     {
         return $this->getEntityRepository()->findBy($array);
@@ -86,7 +91,7 @@ class Action implements ServiceLocatorAwareInterface
     public function getEntityRepository()
     {
         if (null === $this->er) {
-            $this->er = $this->em->getRepository('AdfabFlow\Entity\OpenGraphAction');
+            $this->er = $this->em->getRepository('AdfabFlow\Entity\OpenGraphObjectAttribute');
         }
 
         return $this->er;

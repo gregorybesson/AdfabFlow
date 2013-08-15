@@ -9,7 +9,7 @@ use ZfcBase\Mapper\AbstractDbMapper;
 use Zend\Stdlib\Hydrator\HydratorInterface;
 use AdfabFlow\Options\ModuleOptions;
 
-class Action implements ServiceLocatorAwareInterface
+class Domain implements ServiceLocatorAwareInterface
 {
     /**
      * @var \Doctrine\ORM\EntityManager
@@ -86,7 +86,7 @@ class Action implements ServiceLocatorAwareInterface
     public function getEntityRepository()
     {
         if (null === $this->er) {
-            $this->er = $this->em->getRepository('AdfabFlow\Entity\OpenGraphAction');
+            $this->er = $this->em->getRepository('AdfabFlow\Entity\OpenGraphDomain');
         }
 
         return $this->er;

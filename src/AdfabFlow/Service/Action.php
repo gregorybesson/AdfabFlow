@@ -27,11 +27,33 @@ class Action extends EventProvider implements ServiceManagerAwareInterface
 
     public function create(array $data)
     {
+    	$action  = new \AdfabFlow\Entity\OpenGraphAction();
+    	$form  = $this->getServiceManager()->get('adfabflow_action_form');
+    	$form->bind($action);
+    	$form->setData($data);
+    	
+    	if (!$form->isValid()) {
+    		return false;
+    	}
+    	
+    	$this->getEventManager()->trigger(__FUNCTION__, $this, array('action' => $action, 'data' => $data));
+    	$this->getActionMapper()->insert($action);
+    	$this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('action' => $action, 'data' => $data));
+    	
+    	return $action;
 
     }
 
     public function edit(array $data, $action)
     {
+    	$form  = $this->getServiceManager()->get('adfabflow_action_form');
+    	$form->bind($action);
+    	$form->setData($data);
+    	 
+    	if (!$form->isValid()) {
+    		return false;
+    	}
+    	
         $this->getActionMapper()->update($action);
         $this->getEventManager()->trigger(__FUNCTION__, $this, array('action' => $action, 'data' => $data));
         $this->getActionMapper()->insert($action);
