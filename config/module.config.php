@@ -19,18 +19,10 @@ return array(
 
     'view_manager' => array(
         'template_map' => array(
-            'adfab-flow/index/init'				=> __DIR__ .  '/../view/adfab-flow/frontend/init.phtml',
-        	'adfab-flow/action/list'			=> __DIR__ .  '/../view/adfab-flow/admin/action/list.phtml',
-        	'adfab-flow/object/list'			=> __DIR__ .  '/../view/adfab-flow/admin/object/list.phtml',
-        	'adfab-flow/object/list-attribute'	=> __DIR__ .  '/../view/adfab-flow/admin/object/list-attribute.phtml',
-        	'adfab-flow/story/list'				=> __DIR__ .  '/../view/adfab-flow/admin/story/list.phtml',
-        	'adfab-flow/domain/list'			=> __DIR__ .  '/../view/adfab-flow/admin/domain/list.phtml',
-        	'adfab-flow/domain/list-story'		=> __DIR__ .  '/../view/adfab-flow/admin/domain/list-story.phtml',
-        	'adfab-flow/domain/list-attribute'  => __DIR__ .  '/../view/adfab-flow/admin/domain/list-attribute.phtml',
-        		
         ),
         'template_path_stack' => array(
-            'adfabflow' => __DIR__ . '/../view',
+            __DIR__ . '/../view/admin',
+        	__DIR__ . '/../view/frontend',
         ),
         'strategies' => array(
             'ViewJsonStrategy',
