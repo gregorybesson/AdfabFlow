@@ -1,4 +1,5 @@
-AdfabFaq
-========
+AdfabFlow
+=========
 
-A simple Faq module 
+Module recueillant les flux de données. Exposition de WS REST
+

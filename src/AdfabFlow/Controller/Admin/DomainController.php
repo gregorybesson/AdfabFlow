@@ -46,7 +46,7 @@ class DomainController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_domain_form');
 		$form->bind($domain);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/domain/create', array('domainId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/domain/create', array('domainId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -59,7 +59,7 @@ class DomainController extends AbstractActionController
 			if ($domain) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The domain was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/domain');
+				return $this->redirect()->toRoute('admin/adfabflow/domain');
 			}
 		}
 	
@@ -76,7 +76,7 @@ class DomainController extends AbstractActionController
 		$domainId = $this->getEvent()->getRouteMatch()->getParam('domainId');
 	
 		if (!$domainId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/create');
+			return $this->redirect()->toRoute('admin/adfabflow/domain/create');
 		}
 	
 		$domain = $service->getDomainMapper()->findById($domainId);
@@ -86,7 +86,7 @@ class DomainController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_domain_form');
 		$form->bind($domain);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/domain/edit', array('domainId' => $domainId)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/domain/edit', array('domainId' => $domainId)));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -98,7 +98,7 @@ class DomainController extends AbstractActionController
 			$result = $service->edit($data, $domain);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/domain');
+				return $this->redirect()->toRoute('admin/adfabflow/domain');
 			}
 		}
 	
@@ -115,7 +115,7 @@ class DomainController extends AbstractActionController
 		$domainId = $this->getEvent()->getRouteMatch()->getParam('domainId');
 	
 		if (!$domainId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/create');
+			return $this->redirect()->toRoute('admin/adfabflow/domain/create');
 		}
 	
 		$domain = $service->getDomainMapper()->findById($domainId);
@@ -129,7 +129,7 @@ class DomainController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/domain');
+		return $this->redirect()->toRoute('admin/adfabflow/domain');
 	}
 	
 
@@ -137,7 +137,7 @@ class DomainController extends AbstractActionController
 	{
 		$domainId = $this->getEvent()->getRouteMatch()->getParam('domainId');
 		if (!$domainId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain');
+			return $this->redirect()->toRoute('admin/adfabflow/domain');
 		}
 		$service 	= $this->getAdminDomainService();
 	
@@ -167,7 +167,7 @@ class DomainController extends AbstractActionController
 		$domainId = $this->getEvent()->getRouteMatch()->getParam('domainId');
 	
 		if (!$domainId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain');
+			return $this->redirect()->toRoute('admin/adfabflow/domain');
 		}
 	
 		$mapping = new Mapping();
@@ -176,7 +176,7 @@ class DomainController extends AbstractActionController
 		$form->bind($mapping);
 		$form->get('submit')->setLabel('Add');
 		$form->get('domainId')->setAttribute('value', $domainId);
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/domain/story/create', array('domainId' => $domainId, 'mappingId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/domain/story/create', array('domainId' => $domainId, 'mappingId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -189,7 +189,7 @@ class DomainController extends AbstractActionController
 			if ($storyMapping) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The story was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+				return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 			}
 		}
 	
@@ -207,7 +207,7 @@ class DomainController extends AbstractActionController
 		$mappingId = $this->getEvent()->getRouteMatch()->getParam('mappingId');
 	
 		if (!$mappingId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+			return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 		}
 	
 		$storyMapping = $service->getStoryMappingMapper()->findById($mappingId);
@@ -216,7 +216,7 @@ class DomainController extends AbstractActionController
 	
 		$form = $this->getServiceLocator()->get('adfabflow_storymapping_form');
 		$form->bind($storyMapping);
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/domain/story/edit', array('domainId' => $domainId, 'mappingId' => $mappingId)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/domain/story/edit', array('domainId' => $domainId, 'mappingId' => $mappingId)));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -228,7 +228,7 @@ class DomainController extends AbstractActionController
 			$result = $service->editStory($data, $storyMapping);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+				return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 			}
 		}
 	
@@ -246,7 +246,7 @@ class DomainController extends AbstractActionController
 		$mappingId = $this->getEvent()->getRouteMatch()->getParam('mappingId');
 	
 		if (!$mappingId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+			return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 		}
 	
 		$storyMapping = $service->getStoryMappingMapper()->findById($mappingId);
@@ -260,7 +260,7 @@ class DomainController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+		return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 	}
 	
 	public function listAttributeAction()
@@ -269,7 +269,7 @@ class DomainController extends AbstractActionController
 		$domainId = $this->getEvent()->getRouteMatch()->getParam('domainId');
 		$mappingId = $this->getEvent()->getRouteMatch()->getParam('mappingId');
 		if (!$mappingId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+			return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 		}
 		$storyMapping = $service->getStoryMappingMapper()->findById($mappingId);
 	
@@ -299,7 +299,7 @@ class DomainController extends AbstractActionController
 		$objectId = $this->getEvent()->getRouteMatch()->getParam('objectId');
 	
 		if (!$objectId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object');
+			return $this->redirect()->toRoute('admin/adfabflow/object');
 		}
 	
 		$attribute = new Attribute();
@@ -308,7 +308,7 @@ class DomainController extends AbstractActionController
 		$form->bind($attribute);
 		$form->get('submit')->setLabel('Add');
 		$form->get('objectId')->setAttribute('value', $objectId);
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/object/attribute/create', array('objectId' => $objectId, 'attributeId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/object/attribute/create', array('objectId' => $objectId, 'attributeId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -321,7 +321,7 @@ class DomainController extends AbstractActionController
 			if ($attribute) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The attribute was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute', array('objectId' => $objectId));
+				return $this->redirect()->toRoute('admin/adfabflow/object/attribute', array('objectId' => $objectId));
 			}
 		}
 	
@@ -339,7 +339,7 @@ class DomainController extends AbstractActionController
 		$mappingId = $this->getEvent()->getRouteMatch()->getParam('mappingId');
 		$attributeId = $this->getEvent()->getRouteMatch()->getParam('attributeId');
 		if (!$attributeId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story', array('domainId' => $domainId));
+			return $this->redirect()->toRoute('admin/adfabflow/domain/story', array('domainId' => $domainId));
 		}
 		$attributeMapping = $service->getObjectAttributeMappingMapper()->findById($attributeId);
 		
@@ -348,7 +348,7 @@ class DomainController extends AbstractActionController
 	
 		$form = $this->getServiceLocator()->get('adfabflow_objectattributemapping_form');
 		$form->bind($attributeMapping);
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/domain/story/attribute/edit', array('domainId' => $domainId, 'mappingId' => $mappingId, 'attributeId' => $attributeMapping->getId())));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/domain/story/attribute/edit', array('domainId' => $domainId, 'mappingId' => $mappingId, 'attributeId' => $attributeMapping->getId())));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -360,7 +360,7 @@ class DomainController extends AbstractActionController
 			$result = $service->editAttribute($data, $attributeMapping);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/domain/story/attribute', array('domainId' => $domainId, 'mappingId' => $mappingId));
+				return $this->redirect()->toRoute('admin/adfabflow/domain/story/attribute', array('domainId' => $domainId, 'mappingId' => $mappingId));
 			}
 		}
 	
@@ -378,7 +378,7 @@ class DomainController extends AbstractActionController
 		$attributeId = $this->getEvent()->getRouteMatch()->getParam('attributeId');
 	
 		if (!$attributeId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute/create', array('objectId' => $objectId));
+			return $this->redirect()->toRoute('admin/adfabflow/object/attribute/create', array('objectId' => $objectId));
 		}
 	
 		$attribute = $service->getObjectAttributeMapper()->findById($attributeId);
@@ -392,7 +392,7 @@ class DomainController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute', array('objectId' => $objectId));
+		return $this->redirect()->toRoute('admin/adfabflow/object/attribute', array('objectId' => $objectId));
 	}*/
 	
 	public function getAdminDomainService()

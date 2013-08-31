@@ -6,7 +6,7 @@ if (isset($fm[0]))
     print '<span class=>' . $fm[0] . '</span>';
 }
 ?>
-<?php $addLink = $this->url('zfcadmin/adfabflow/story/create', array('storyId' => 0)); ?>
+<?php $addLink = $this->url('admin/adfabflow/story/create', array('storyId' => 0)); ?>
 
 <ul class="liste-buttons">
 	<li class="btn-admin"><a href="<?php echo $addLink;?>"><?php echo $this->translate('Add new story'); ?></a></li>
@@ -23,9 +23,9 @@ if (isset($fm[0]))
         <th></th>
     </tr>
     <?php foreach ($this->stories as $story): ?>
-    	<?php $editLink = $this->url('zfcadmin/adfabflow/story/edit', array('storyId' => $story->getId()));?>
-    	<?php $deleteLink = $this->url('zfcadmin/adfabflow/story/remove', array('storyId' => $story->getId()));?>
-    	<?php $optionLink = '';//$this->url('zfcadmin/adfabflow/story/attribute', array('storyId' => $story->getId())); ?>
+    	<?php $editLink = $this->url('admin/adfabflow/story/edit', array('storyId' => $story->getId()));?>
+    	<?php $deleteLink = $this->url('admin/adfabflow/story/remove', array('storyId' => $story->getId()));?>
+    	<?php $optionLink = '';//$this->url('admin/adfabflow/story/attribute', array('storyId' => $story->getId())); ?>
         <tr>
             <td><?php echo $story->getCode() ?></td>
             <td><?php echo $story->getLabel() ?></td>

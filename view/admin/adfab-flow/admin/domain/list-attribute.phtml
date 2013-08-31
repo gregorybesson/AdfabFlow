@@ -18,7 +18,7 @@ if (isset($fm[0]))
         <th></th>
     </tr>
     <?php foreach ($this->attributes as $attributeMapping): ?>
-    	<?php $editLink = $this->url('zfcadmin/adfabflow/domain/story/attribute/edit', array('domainId' => $this->domainId, 'mappingId' => $this->mappingId, 'attributeId' => $attributeMapping->getId()));?>
+    	<?php $editLink = $this->url('admin/adfabflow/domain/story/attribute/edit', array('domainId' => $this->domainId, 'mappingId' => $this->mappingId, 'attributeId' => $attributeMapping->getId()));?>
     	
         <tr>
             <td><?php echo $attributeMapping->getAttribute()->getCode() ?></td>

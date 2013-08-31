@@ -45,7 +45,7 @@ class StoryController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_story_form');
 		$form->bind($story);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/story/create', array('storyId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/story/create', array('storyId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -58,7 +58,7 @@ class StoryController extends AbstractActionController
 			if ($story) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The story was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/story');
+				return $this->redirect()->toRoute('admin/adfabflow/story');
 			}
 		}
 	
@@ -75,7 +75,7 @@ class StoryController extends AbstractActionController
 		$storyId = $this->getEvent()->getRouteMatch()->getParam('storyId');
 	
 		if (!$storyId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/story/create');
+			return $this->redirect()->toRoute('admin/adfabflow/story/create');
 		}
 	
 		$story = $service->getStoryMapper()->findById($storyId);
@@ -85,7 +85,7 @@ class StoryController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_story_form');
 		$form->bind($story);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/story/edit', array('storyId' => $storyId)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/story/edit', array('storyId' => $storyId)));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -97,7 +97,7 @@ class StoryController extends AbstractActionController
 			$result = $service->edit($data, $story);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/story');
+				return $this->redirect()->toRoute('admin/adfabflow/story');
 			}
 		}
 	
@@ -114,7 +114,7 @@ class StoryController extends AbstractActionController
 		$storyId = $this->getEvent()->getRouteMatch()->getParam('storyId');
 	
 		if (!$storyId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/story/create');
+			return $this->redirect()->toRoute('admin/adfabflow/story/create');
 		}
 	
 		$story = $service->getStoryMapper()->findById($storyId);
@@ -128,7 +128,7 @@ class StoryController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/story');
+		return $this->redirect()->toRoute('admin/adfabflow/story');
 	}
 	
 	public function getAdminStoryService()

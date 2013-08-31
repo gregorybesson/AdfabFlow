@@ -6,7 +6,7 @@ if (isset($fm[0]))
     print '<span class=>' . $fm[0] . '</span>';
 }
 ?>
-<?php $addLink = $this->url('zfcadmin/adfabflow/object/attribute/create', array('objectId' => $this->objectId,'objectAttributeId' => 0)); ?>
+<?php $addLink = $this->url('admin/adfabflow/object/attribute/create', array('objectId' => $this->objectId,'objectAttributeId' => 0)); ?>
 
 <ul class="liste-buttons">
 	<li class="btn-admin"><a href="<?php echo $addLink;?>"><?php echo $this->translate('Add new object attribute'); ?></a></li>
@@ -22,8 +22,8 @@ if (isset($fm[0]))
         <th></th>
     </tr>
     <?php foreach ($this->attributes as $attribute): ?>
-    	<?php $editLink = $this->url('zfcadmin/adfabflow/object/attribute/edit', array('objectId' => $this->objectId,'attributeId' => $attribute->getId()));?>
-    	<?php $deleteLink = $this->url('zfcadmin/adfabflow/object/attribute/remove', array('objectId' => $this->objectId, 'attributeId' => $attribute->getId()));?>
+    	<?php $editLink = $this->url('admin/adfabflow/object/attribute/edit', array('objectId' => $this->objectId,'attributeId' => $attribute->getId()));?>
+    	<?php $deleteLink = $this->url('admin/adfabflow/object/attribute/remove', array('objectId' => $this->objectId, 'attributeId' => $attribute->getId()));?>
     	
         <tr>
             <td><?php echo $attribute->getCode() ?></td>

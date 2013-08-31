@@ -6,7 +6,7 @@ if (isset($fm[0]))
     print '<span class=>' . $fm[0] . '</span>';
 }
 ?>
-<?php $addLink = $this->url('zfcadmin/adfabflow/domain/create', array('domainId' => 0)); ?>
+<?php $addLink = $this->url('admin/adfabflow/domain/create', array('domainId' => 0)); ?>
 
 <ul class="liste-buttons">
 	<li class="btn-admin"><a href="<?php echo $addLink;?>"><?php echo $this->translate('Add new domain'); ?></a></li>
@@ -22,9 +22,9 @@ if (isset($fm[0]))
         <th></th>
     </tr>
     <?php foreach ($this->domains as $domain): ?>
-    	<?php $editLink = $this->url('zfcadmin/adfabflow/domain/edit', array('domainId' => $domain->getId()));?>
-    	<?php $deleteLink = $this->url('zfcadmin/adfabflow/domain/remove', array('domainId' => $domain->getId()));?>
-    	<?php $optionLink = $this->url('zfcadmin/adfabflow/domain/story', array('domainId' => $domain->getId())); ?>
+    	<?php $editLink = $this->url('admin/adfabflow/domain/edit', array('domainId' => $domain->getId()));?>
+    	<?php $deleteLink = $this->url('admin/adfabflow/domain/remove', array('domainId' => $domain->getId()));?>
+    	<?php $optionLink = $this->url('admin/adfabflow/domain/story', array('domainId' => $domain->getId())); ?>
         <tr>
             <td><?php echo $domain->getTitle() ?></td>
             <td><?php echo $domain->getDomain() ?></td>

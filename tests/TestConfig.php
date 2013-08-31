@@ -10,7 +10,6 @@ return array(
     	'ZfcBase',
    		'ZfcAdmin',
    		'AdfabCore',
-    	'AdfabFaq',
     	'AdfabFlow',
         'Application',
     ),

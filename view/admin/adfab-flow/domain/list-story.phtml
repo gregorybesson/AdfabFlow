@@ -6,7 +6,7 @@ if (isset($fm[0]))
     print '<span class=>' . $fm[0] . '</span>';
 }
 ?>
-<?php $addLink = $this->url('zfcadmin/adfabflow/domain/story/create', array('domainId' => $this->domainId, 'mappingId' => 0)); ?>
+<?php $addLink = $this->url('admin/adfabflow/domain/story/create', array('domainId' => $this->domainId, 'mappingId' => 0)); ?>
 
 <ul class="liste-buttons">
 	<li class="btn-admin"><a href="<?php echo $addLink;?>"><?php echo $this->translate('Add new story'); ?></a></li>
@@ -22,9 +22,9 @@ if (isset($fm[0]))
         <th></th>
     </tr>
     <?php foreach ($this->mapping as $map): ?>
-    	<?php $editLink = $this->url('zfcadmin/adfabflow/domain/story/edit', array('domainId' => $this->domainId, 'mappingId' => $map->getId()));?>
-    	<?php $deleteLink = $this->url('zfcadmin/adfabflow/domain/story/remove', array('domainId' => $this->domainId, 'mappingId' => $map->getId()));?>
-    	<?php $optionLink = $this->url('zfcadmin/adfabflow/domain/story/attribute', array('domainId' => $domain->getId(), 'mappingId' => $map->getId())); ?>
+    	<?php $editLink = $this->url('admin/adfabflow/domain/story/edit', array('domainId' => $this->domainId, 'mappingId' => $map->getId()));?>
+    	<?php $deleteLink = $this->url('admin/adfabflow/domain/story/remove', array('domainId' => $this->domainId, 'mappingId' => $map->getId()));?>
+    	<?php $optionLink = $this->url('admin/adfabflow/domain/story/attribute', array('domainId' => $domain->getId(), 'mappingId' => $map->getId())); ?>
         <tr>
             <td><?php echo $map->getStory()->getCode() ?></td>
             <td><?php echo $map->getStory()->getLabel() ?></td>

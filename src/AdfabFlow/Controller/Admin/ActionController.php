@@ -45,7 +45,7 @@ class ActionController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_action_form');
 		$form->bind($action);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/action/create', array('actionId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/action/create', array('actionId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -58,7 +58,7 @@ class ActionController extends AbstractActionController
 			if ($action) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The action was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/action');
+				return $this->redirect()->toRoute('admin/adfabflow/action');
 			}
 		}
 	
@@ -75,7 +75,7 @@ class ActionController extends AbstractActionController
 		$actionId = $this->getEvent()->getRouteMatch()->getParam('actionId');
 	
 		if (!$actionId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/action/create');
+			return $this->redirect()->toRoute('admin/adfabflow/action/create');
 		}
 	
 		$action = $service->getActionMapper()->findById($actionId);
@@ -85,7 +85,7 @@ class ActionController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_action_form');
 		$form->bind($action);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/action/edit', array('actionId' => $actionId)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/action/edit', array('actionId' => $actionId)));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -97,7 +97,7 @@ class ActionController extends AbstractActionController
 			$result = $service->edit($data, $action);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/action');
+				return $this->redirect()->toRoute('admin/adfabflow/action');
 			}
 		}
 	
@@ -114,7 +114,7 @@ class ActionController extends AbstractActionController
 		$actionId = $this->getEvent()->getRouteMatch()->getParam('actionId');
 	
 		if (!$actionId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/action/create');
+			return $this->redirect()->toRoute('admin/adfabflow/action/create');
 		}
 	
 		$action = $service->getActionMapper()->findById($actionId);
@@ -128,7 +128,7 @@ class ActionController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/action');
+		return $this->redirect()->toRoute('admin/adfabflow/action');
 	}
 	
 	public function getAdminActionService()

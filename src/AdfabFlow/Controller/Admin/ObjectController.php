@@ -46,7 +46,7 @@ class ObjectController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_object_form');
 		$form->bind($object);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/object/create', array('objectId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/object/create', array('objectId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -59,7 +59,7 @@ class ObjectController extends AbstractActionController
 			if ($object) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The object was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/object');
+				return $this->redirect()->toRoute('admin/adfabflow/object');
 			}
 		}
 	
@@ -76,7 +76,7 @@ class ObjectController extends AbstractActionController
 		$objectId = $this->getEvent()->getRouteMatch()->getParam('objectId');
 	
 		if (!$objectId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object/create');
+			return $this->redirect()->toRoute('admin/adfabflow/object/create');
 		}
 	
 		$object = $service->getObjectMapper()->findById($objectId);
@@ -86,7 +86,7 @@ class ObjectController extends AbstractActionController
 		$form = $this->getServiceLocator()->get('adfabflow_object_form');
 		$form->bind($object);
 		$form->get('submit')->setLabel('Add');
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/object/edit', array('objectId' => $objectId)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/object/edit', array('objectId' => $objectId)));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -98,7 +98,7 @@ class ObjectController extends AbstractActionController
 			$result = $service->edit($data, $object);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/object');
+				return $this->redirect()->toRoute('admin/adfabflow/object');
 			}
 		}
 	
@@ -115,7 +115,7 @@ class ObjectController extends AbstractActionController
 		$objectId = $this->getEvent()->getRouteMatch()->getParam('objectId');
 	
 		if (!$objectId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object/create');
+			return $this->redirect()->toRoute('admin/adfabflow/object/create');
 		}
 	
 		$object = $service->getObjectMapper()->findById($objectId);
@@ -129,14 +129,14 @@ class ObjectController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/object');
+		return $this->redirect()->toRoute('admin/adfabflow/object');
 	}
 	
 	public function listAttributeAction()
 	{
 		$objectId = $this->getEvent()->getRouteMatch()->getParam('objectId');
 		if (!$objectId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object');
+			return $this->redirect()->toRoute('admin/adfabflow/object');
 		}
 		$service 	= $this->getAdminObjectService();
 
@@ -166,7 +166,7 @@ class ObjectController extends AbstractActionController
 		$objectId = $this->getEvent()->getRouteMatch()->getParam('objectId');
 		
 		if (!$objectId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object');
+			return $this->redirect()->toRoute('admin/adfabflow/object');
 		}
 	
 		$attribute = new Attribute();
@@ -175,7 +175,7 @@ class ObjectController extends AbstractActionController
 		$form->bind($attribute);
 		$form->get('submit')->setLabel('Add');
 		$form->get('objectId')->setAttribute('value', $objectId);
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/object/attribute/create', array('objectId' => $objectId, 'attributeId' => 0)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/object/attribute/create', array('objectId' => $objectId, 'attributeId' => 0)));
 		$form->setAttribute('method', 'post');
 	
 		$request = $this->getRequest();
@@ -188,7 +188,7 @@ class ObjectController extends AbstractActionController
 			if ($attribute) {
 				$this->flashMessenger()->setNamespace('adfabflow')->addMessage('The attribute was created');
 	
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute', array('objectId' => $objectId));
+				return $this->redirect()->toRoute('admin/adfabflow/object/attribute', array('objectId' => $objectId));
 			}
 		}
 	
@@ -206,7 +206,7 @@ class ObjectController extends AbstractActionController
 		$attributeId = $this->getEvent()->getRouteMatch()->getParam('attributeId');
 	
 		if (!$attributeId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute', array('objectId' => $objectId));
+			return $this->redirect()->toRoute('admin/adfabflow/object/attribute', array('objectId' => $objectId));
 		}
 	
 		$attribute = $service->getObjectAttributeMapper()->findById($attributeId);
@@ -215,7 +215,7 @@ class ObjectController extends AbstractActionController
 	
 		$form = $this->getServiceLocator()->get('adfabflow_objectattribute_form');
 		$form->bind($attribute);
-		$form->setAttribute('action', $this->url()->fromRoute('zfcadmin/adfabflow/object/attribute/edit', array('objectId' => $objectId, 'attributeId' => $attributeId)));
+		$form->setAttribute('action', $this->url()->fromRoute('admin/adfabflow/object/attribute/edit', array('objectId' => $objectId, 'attributeId' => $attributeId)));
 		$form->setAttribute('method', 'post');
 		$form->get('submit')->setLabel('Edit');
 	
@@ -227,7 +227,7 @@ class ObjectController extends AbstractActionController
 			$result = $service->editAttribute($data, $attribute);
 	
 			if ($result) {
-				return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute', array('objectId' => $objectId));
+				return $this->redirect()->toRoute('admin/adfabflow/object/attribute', array('objectId' => $objectId));
 			}
 		}
 	
@@ -245,7 +245,7 @@ class ObjectController extends AbstractActionController
 		$attributeId = $this->getEvent()->getRouteMatch()->getParam('attributeId');
 	
 		if (!$attributeId) {
-			return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute/create', array('objectId' => $objectId));
+			return $this->redirect()->toRoute('admin/adfabflow/object/attribute/create', array('objectId' => $objectId));
 		}
 	
 		$attribute = $service->getObjectAttributeMapper()->findById($attributeId);
@@ -259,7 +259,7 @@ class ObjectController extends AbstractActionController
 			}
 		}
 	
-		return $this->redirect()->toRoute('zfcadmin/adfabflow/object/attribute', array('objectId' => $objectId));
+		return $this->redirect()->toRoute('admin/adfabflow/object/attribute', array('objectId' => $objectId));
 	}
 	
 	public function getAdminObjectService()

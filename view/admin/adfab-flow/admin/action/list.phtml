@@ -6,7 +6,7 @@ if (isset($fm[0]))
     print '<span class=>' . $fm[0] . '</span>';
 }
 ?>
-<?php $addLink = $this->url('zfcadmin/adfabflow/action/create', array('actionId' => 0)); ?>
+<?php $addLink = $this->url('admin/adfabflow/action/create', array('actionId' => 0)); ?>
 
 <ul class="liste-buttons">
 	<li class="btn-admin"><a href="<?php echo $addLink;?>"><?php echo $this->translate('Add new action'); ?></a></li>
@@ -22,8 +22,8 @@ if (isset($fm[0]))
         <th></th>
     </tr>
     <?php foreach ($this->actions as $action): ?>
-    	<?php $editLink = $this->url('zfcadmin/adfabflow/action/edit', array('actionId' => $action->getId()));?>
-    	<?php $deleteLink = $this->url('zfcadmin/adfabflow/action/remove', array('actionId' => $action->getId()));?>
+    	<?php $editLink = $this->url('admin/adfabflow/action/edit', array('actionId' => $action->getId()));?>
+    	<?php $deleteLink = $this->url('admin/adfabflow/action/remove', array('actionId' => $action->getId()));?>
     	
         <tr>
             <td><?php echo $action->getCode() ?></td>
