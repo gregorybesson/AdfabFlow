@@ -48,19 +48,19 @@ return array(
             'default_layout' => 'layout/1column',
         	'controllers' => array(
        			'adfabflowadmin' => array(
-      				'default_layout' => 'application/layout/admin/admin',
+      				'default_layout' => 'layout/admin',
      			),
        			'adfabflowadminaction' => array(
-       				'default_layout' => 'application/layout/admin/admin',
+       				'default_layout' => 'layout/admin',
        			),
        			'adfabflowadminstory' => array(
-       				'default_layout' => 'application/layout/admin/admin',
+       				'default_layout' => 'layout/admin',
       			),
      			'adfabflowadmindomain' => array(
-      				'default_layout' => 'application/layout/admin/admin',
+      				'default_layout' => 'layout/admin',
       			),
       			'adfabflowadminobject' => array(
-      				'default_layout' => 'application/layout/admin/admin',
+      				'default_layout' => 'layout/admin',
        			),
         	),
         ),
