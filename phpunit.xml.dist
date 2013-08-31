@@ -2,14 +2,14 @@
 
 <phpunit bootstrap="./tests/Bootstrap.php">
     <testsuites>
-        <testsuite name="adfabflow">
-            <directory>./tests/AdfabFlowTest</directory>
+        <testsuite name="adfabfaq">
+            <directory>./tests/AdfabFaqTest</directory>
         </testsuite>
     </testsuites>
     
     <filter>
         <whitelist>
-            <directory suffix=".php">./src/AdfabFlow</directory>
+            <directory suffix=".php">./src/AdfabFaq</directory>
             <directory suffix=".phtml">./view</directory>
             <exclude>
                 <directory suffix=".php">./tests/</directory>

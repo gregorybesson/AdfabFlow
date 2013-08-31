@@ -10,7 +10,7 @@ return array(
     	'ZfcBase',
    		'ZfcAdmin',
    		'AdfabCore',
-    	'AdfabFlow',
+    	'AdfabFaq',
         'Application',
     ),
     'module_listener_options' => array(
